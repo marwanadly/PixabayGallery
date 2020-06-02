@@ -13,9 +13,8 @@ class ImagesRemoteDataSource @Inject constructor(private val imagesApi: ImagesAp
     @SuppressLint("CheckResult")
     fun getImages(query: String, page: Int): Single<List<Image>> {
         return imagesApi.getImages(ApiConstants.API_KEY, query = query, page = page)
-            .flatMap { imagesResponse -> Observable.fromIterable(imagesResponse.images).toList() }
             .flatMap { response ->
-                Observable.fromIterable(response.map {
+                Observable.fromIterable(response.images.map {
                     it.searchQuery = query
                     it.pageNumber = page
                     return@map it

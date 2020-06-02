@@ -1,6 +1,5 @@
 package com.payback.pixabaygallery.util
 
-import java.io.IOException
 import java.net.InetSocketAddress
 import java.net.Socket
 import java.net.SocketAddress
@@ -15,7 +14,7 @@ class ConnectivityUtility {
                 sock.connect(sockaddr, timeoutMs)
                 sock.close()
                 true
-            } catch (e: IOException) {
+            } catch (e: Throwable) {
                 false
             }
         }

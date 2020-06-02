@@ -16,22 +16,11 @@ class BindingAdapters {
         @JvmStatic
         @BindingAdapter("imageUrl", "alternativeImageUrl")
         fun loadImage(view: ImageView, imageUrl: String, alternativeImageUrl: String) {
-            if (imageUrl != "") {
-                val builder = Picasso.Builder(view.context)
-                builder.listener { picasso, _, _ ->
-                    if (alternativeImageUrl != ""){
-                        picasso.load(alternativeImageUrl)
-                            .into(view)
-                    }
-                }
-
-                builder.build().load(imageUrl).into(view)
-
-            } else {
-                Picasso.get()
-                    .load(R.drawable.placeholder)
+            if (imageUrl != "")
+                Picasso.get().load(imageUrl)
+                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.placeholder)
                     .into(view)
-            }
         }
 
 
